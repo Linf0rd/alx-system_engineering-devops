@@ -1,6 +1,2 @@
 #!/bin/bash
-<<<<<<< HEAD
 ln -s /bin/ls __ls__ 
-=======
-ln -s /bin/ls __ls__ \n
->>>>>>> dc4509c0915389e06f8065c21f9a328ef097da8a
