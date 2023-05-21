@@ -12,7 +12,7 @@ _4-listmorefiles_ - Displays the current directory contents, including hidden fi
 #
 _5-listfilesdigitonly_ - Displays the current directory contents. Long format, with user and group IDs displayed numerically as well as hidden files (starting with .)
 #
-_6-firstdirectory_ - Creates a script that creates a directory named *my_first_directory* in the /tmp/ directory.
+_6-firstdirectory_ - Creates a directory named *my_first_directory* in the /tmp/ directory.
 #
 _7-movethatfile_ - Moves the file *betty* from /tmp/ to /tmp/my_first_directory
 #
