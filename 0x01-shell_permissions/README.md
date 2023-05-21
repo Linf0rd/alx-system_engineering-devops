@@ -1,4 +1,4 @@
-This is short project on Shell permissions
+Learning about creating Shell scripts and permissions. 
 
 *0-iam_betty* - Switches the current user to the user betty.
 
