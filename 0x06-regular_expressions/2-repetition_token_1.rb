@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-regex = /hbt*n/
+regex = /hb?t?n/
 string = ARGV[0]
 
 puts string.scan(regex).join
