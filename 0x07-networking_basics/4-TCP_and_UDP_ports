@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Displays listening ports as well the listening sockets.
+
+netstat -tulnep | awk '/^tcp/ || /^udp/ {print $0}'
