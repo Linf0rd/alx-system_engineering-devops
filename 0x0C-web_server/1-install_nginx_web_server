@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Installs nginx web server on Ubuntu 16.04
+# Create a default site configuration file
+# Restart nginx
+# Check if nginx is running
+# Check if nginx is listening on port 80
+# Check if nginx is serving the default page
+# Check if nginx is serving the default page with curl -sI
+# Check nginx logs
+
+apt-get update
+apt-get install -y nginx
+
+echo "server {
+	listen 80;
+	server_name localhost;
+	root /var/www/html;
+
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+}" > /etc/nginx/sites-enabled/default
+
+service nginx restart
+
+nginx -t
+
+netstat -plntu | grep 80
+
+curl localhost
+
+curl -sI localhost
+
+tail -f /var/log/nginx/access.log
+tail -f /var/log/nginx/error.log
