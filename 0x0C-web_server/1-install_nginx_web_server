@@ -1,17 +1,23 @@
 #!/usr/bin/env bash
-# Installing Nginx web server.
+# Installs Nginx on the web server.
 
-sudo apt-get update
-sudo apt-get install -y nginx
+apt-get update
+apt-get install -y nginx
 
-mkdir /etc/nginx/html
-touch /etc/nginx/html/index.html
-sudo echo "Hello World!" > /etc/nginx/html/index.html
+cat <<EOF > /etc/nginx/sites-available/default
+server {
+	listen 80;
+	server_name localhost;
 
-sudo sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+	location / {
+		root /var/www/html;
+		index index.html;
+	}
+}
+EOF
 
-sudo service nginx restart
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-sudo netstat -anp | grep 80
+service nginx restart
 
 curl localhost
