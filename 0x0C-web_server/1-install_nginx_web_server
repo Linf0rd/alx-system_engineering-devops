@@ -6,6 +6,10 @@ sudo apt-get install -y nginx
 
 sudo sed -i "s/listen 80 default_server;/listen 80;/g" /etc/nginx/sites-available/default
 
+sudo echo "Hello World!" > /var/www/html/index.html
+
 sudo service nginx restart
 
-sudo curl localhost
+sudo netstat -anp | grep 80
+
+curl localhost
