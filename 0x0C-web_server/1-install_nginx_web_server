@@ -4,8 +4,35 @@
 sudo apt-get update
 sudo apt-get install -y nginx
 
-sudo chown -R ubuntu /var/www
+sudo sed -i 's/listen 80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
 
-echo "Hello World" > /var/www/html/index.html
+cat << EOF > /etc/nginx/sites-available/default/hello-world
+server {
+	listen 80;
+	server_name localhost;
 
-sudo service nginx start
+	location / {
+		root /var/www/html;
+		index index.html;
+	}
+}
+EOF
+
+sudo ln -s /etc/nginx/sites-available/hello-world /etc/nginx/sites-enabled/hello-world
+
+cat << EOF > /var/www/html/index.html
+<html>
+<head>
+	<title>Hello World!</title>
+</head>
+<body>
+	<h1>Hello World!</h1>
+</body>
+</html>
+EOF
+
+sudo service nginx restart
+
+sudo netstat -tnlp | grep :80
+
+curl -w "%{http_code}\n" localhost | grep 200
