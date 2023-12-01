@@ -1,7 +1,6 @@
-# Install flask
+# Installs flask
 
-package { 'Flask':
-  ensure   => present,
-  version  => '2.1.0',
-  provider => pip3,
+exec { 'install flask 2.1.0':
+  command => 'pip3 install flask==2.1.0',
+  path    => ['/usr/bin'],
 }
