@@ -6,7 +6,7 @@ sudo apt-get install -y nginx
 
 sudo sed -i 's/listen 80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
 
-cat << EOF > /etc/nginx/sites-available/default
+cat << EOF > /etc/nginx/sites-available/default/hello-world
 server {
 	listen 80;
 	server_name localhost;
@@ -18,8 +18,21 @@ server {
 }
 EOF
 
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/hello-world /etc/nginx/sites-enabled/hello-world
 
-service nginx restart
+cat << EOF > /var/www/html/index.html
+<html>
+<head>
+	<title>Hello World!</title>
+</head>
+<body>
+	<h1>Hello World!</h1>
+</body>
+</html>
+EOF
 
-curl localhost
+sudo service nginx restart
+
+sudo netstat -tnlp | grep :80
+
+curl -w "%{http_code}\n" localhost | grep 200
