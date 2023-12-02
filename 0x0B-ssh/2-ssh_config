@@ -1,0 +1,6 @@
+# SSH Config File
+
+Host *
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  IdentityFile ~/.ssh/school
