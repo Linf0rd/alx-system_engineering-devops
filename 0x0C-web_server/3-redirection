@@ -10,7 +10,18 @@ sudo chmod -R 755 /var/www
 mkdir -p /var/www/html/
 echo "Hello World!" > /var/www/html/index.html
 
-sed -i '/listen 80 default_server/a rewrite ^/redirect_me
-https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+echo "server {
+    listen 80 default_server;
+    server_name _;
 
-service nginx start
+    location /redirect_me {
+        rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+    }
+
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}" | sudo tee /etc/nginx/sites-available/default > /dev/null
+
+sudo service nginx start
