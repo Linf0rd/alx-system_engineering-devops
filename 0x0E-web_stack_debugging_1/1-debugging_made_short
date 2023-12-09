@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Replacing Nginx config files with default settings.
 
-cat /etc/nginx/sites-available/default > /etc/nginx/sites-enabled/default
+sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
+
 sudo service nginx restart
 
-rm /run/nginx.pid
+echo "" > /run/nginx.pid
