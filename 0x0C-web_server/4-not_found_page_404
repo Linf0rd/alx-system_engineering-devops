@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Bash script for installing Nginx and configuring custom 404 page
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+ufw allow 'Nginx HTTP'
+
+chmod -R 755 /var/www
+echo 'Hello World' > /var/www/html/index.html
+
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html > /dev/null
+
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+
+    location = /favicon.ico {
+        log_not_found off;
+        access_log off;
+    }
+
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+}
+EOF
+
+sudo service nginx reload
+
