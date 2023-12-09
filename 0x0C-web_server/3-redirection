@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # This script configures Nginx to redirect /redirect_me to another page with a 301 Moved Permanently response.
 
 sudo apt-get update
