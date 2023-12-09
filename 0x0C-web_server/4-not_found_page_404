@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Bash script for installing Nginx and configuring custom 404 page
 
 sudo apt-get update
