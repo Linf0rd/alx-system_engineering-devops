@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
-# This script configures Nginx to add a custom HTTP response header
-# The custom header contains the hostname of the server
+# This script configures Nginx to add a custom HTTP response header.
 
-if ! dpkg -l nginx &> /dev/null; then
-	apt-get -y update
-	apt-get -y install nginx
-fi
+sudo apt-get update
+sudo apt-get install -y nginx
+sudo ufw allow 'Nginx HTTP'
 
-echo "add_header X-Served-By \$(hostname);" > /etc/nginx/sites-available/custom_header
-ln -sf /etc/nginx/sites-available/custom_header /etc/nginx/sites-enabled/
+echo 'add_header X-Served-By $hostname;' | sudo tee -a /etc/nginx/sites-available/default
 
-service nginx restart
+sudo service nginx restart
+
+echo 'Nginx configured with custom HTTP response header (X-Served-By)'
