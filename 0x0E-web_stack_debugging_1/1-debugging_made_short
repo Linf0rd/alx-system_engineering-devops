@@ -2,3 +2,4 @@
 # This script fixes the issue with nginx not running.
 service nginx status | grep -q "not running"
 service nginx start
+cat /etc/nginx/sites-available/default > /etc/nginx/sites-enabled/default
