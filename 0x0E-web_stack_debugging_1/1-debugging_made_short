@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Replacing Nginx config files with default settings.
+# Replacing Nginx config files with default setting.
 
 sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
 
