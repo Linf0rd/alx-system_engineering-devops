@@ -1,8 +1,3 @@
 #!/usr/bin/env bash
-# Replacing Nginx config files with default setting.
-
-sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
-
-sudo service nginx restart
-
-echo "" > /run/nginx.pid
+# This script fixes the issue with nginx not running
+service nginx status | grep "not running" && service nginx start
