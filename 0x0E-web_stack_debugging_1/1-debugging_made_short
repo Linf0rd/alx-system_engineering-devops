@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
 # This script fixes the issue with nginx not running.
-
-if service nginx status | grep -q "not running"
-then
-	service nginx start
-fi
+service nginx status | grep -q "not running"
+service nginx start
