@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Configures Nginx to run as the nginx user on port 8080 in 7 lines or less
+
+sed -i 's/user .*;/user nginx;/' /etc/nginx/nginx.conf
+service nginx restart
+ps auxff | grep ngin[x]
+nc -z 0 8080
